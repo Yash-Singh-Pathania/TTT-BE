@@ -43,10 +43,10 @@ services:
     volumes:
       - postgres-data:/var/lib/postgresql/data
     # -------- replace with comment to run migrations with docker --------
-    expose:
-      - "5432"
-    # ports:
-    #  - 5432:5432
+    # expose:
+    #   - "5432"
+    ports:
+     - 5432:5432
 
   redis:
     image: redis:alpine
@@ -79,7 +79,6 @@ services:
   #   depends_on:
   #     - web
 
-  #-------- uncomment to create first superuser --------
   # create_superuser:
   #   build:
   #     context: .
@@ -106,20 +105,6 @@ services:
   #   command: python -m pytest ./tests
   #   volumes:
   #     - .:/code
-
-  #-------- uncomment to create first tier --------
-  # create_tier:
-  #   build:
-  #     context: .
-  #     dockerfile: Dockerfile
-  #   env_file:
-  #     - ./src/.env
-  #   depends_on:
-  #     - db
-  #     - web
-  #   command: python -m src.scripts.create_first_tier
-  #   volumes:
-  #     - ./src:/code/src
 
 volumes:
   postgres-data:
